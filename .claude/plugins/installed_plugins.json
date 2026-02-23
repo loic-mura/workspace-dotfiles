@@ -1,0 +1,106 @@
+{
+  "version": 2,
+  "plugins": {
+    "marketplace-auto-update@datadog-claude-plugins": [
+      {
+        "scope": "project",
+        "projectPath": "/Users/loic.mura/go/src/github.com/DataDog/dd-source",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/marketplace-auto-update/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-10T16:43:24.996Z",
+        "lastUpdated": "2025-12-10T16:43:24.996Z",
+        "gitCommitSha": "9892906e2215a648d509c67ac361242b3fc14d69"
+      }
+    ],
+    "dd@datadog-claude-plugins": [
+      {
+        "scope": "project",
+        "projectPath": "/Users/loic.mura/go/src/github.com/DataDog/dd-source",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd/1.0.1",
+        "version": "1.0.1",
+        "installedAt": "2025-12-10T16:43:24.996Z",
+        "lastUpdated": "2025-12-10T16:43:24.996Z",
+        "gitCommitSha": "9892906e2215a648d509c67ac361242b3fc14d69"
+      }
+    ],
+    "atlas-to-rapid-migrator@datadog-claude-plugins": [
+      {
+        "scope": "project",
+        "projectPath": "/Users/loic.mura/go/src/github.com/DataDog/dd-source",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/atlas-to-rapid-migrator/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-09T08:50:59.678Z",
+        "lastUpdated": "2026-01-09T08:50:59.678Z"
+      }
+    ],
+    "gopls-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/claude-plugins-official/gopls-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-09T08:56:22.932Z",
+        "lastUpdated": "2026-01-09T08:56:22.932Z"
+      }
+    ],
+    "advanced-query@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/advanced-query/a88838835cca",
+        "version": "a88838835cca",
+        "installedAt": "2026-02-06T13:55:30.038Z",
+        "lastUpdated": "2026-02-06T13:55:30.038Z",
+        "gitCommitSha": "a88838835cca08af10cdfa588159efce0f549083"
+      }
+    ],
+    "feature@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/feature/a88838835cca",
+        "version": "a88838835cca",
+        "installedAt": "2026-02-06T13:56:09.767Z",
+        "lastUpdated": "2026-02-06T13:56:09.767Z",
+        "gitCommitSha": "a88838835cca08af10cdfa588159efce0f549083"
+      }
+    ],
+    "rapid@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/rapid/a88838835cca",
+        "version": "a88838835cca",
+        "installedAt": "2026-02-06T13:56:36.709Z",
+        "lastUpdated": "2026-02-06T13:56:36.709Z",
+        "gitCommitSha": "a88838835cca08af10cdfa588159efce0f549083"
+      }
+    ],
+    "orgstore@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/orgstore/a88838835cca",
+        "version": "a88838835cca",
+        "installedAt": "2026-02-06T13:56:42.770Z",
+        "lastUpdated": "2026-02-06T13:56:42.770Z",
+        "gitCommitSha": "a88838835cca08af10cdfa588159efce0f549083"
+      }
+    ],
+    "writing@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/writing/a2f6deb36412",
+        "version": "a2f6deb36412",
+        "installedAt": "2026-02-13T16:02:58.482Z",
+        "lastUpdated": "2026-02-13T16:02:58.482Z",
+        "gitCommitSha": "a2f6deb364125d66dbf94153f9d683d039a7b19c"
+      }
+    ],
+    "dd-octo-sts@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd-octo-sts/fbc861fe93a5",
+        "version": "fbc861fe93a5",
+        "installedAt": "2026-02-19T08:55:02.912Z",
+        "lastUpdated": "2026-02-19T08:55:02.912Z",
+        "gitCommitSha": "fbc861fe93a560ada2bb9ed42f6b4af83ad980a1"
+      }
+    ]
+  }
+}
