@@ -2,30 +2,35 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-CLAUDE_HOME="$HOME/.claude"
-TARGETS=(agents skills CLAUDE.md settings.json plugins/installed_plugins.json)
 
-mkdir -p "$CLAUDE_HOME"
-
-for target in "${TARGETS[@]}"; do
-    src="$DOTFILES_DIR/.claude/$target"
-    dest="$CLAUDE_HOME/$target"
-
-    mkdir -p "$(dirname "$dest")"
+link_to_home() {
+    local src="$1"
+    local dest="$HOME/${src#$DOTFILES_DIR/}"
 
     if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
-        echo "  skip  $target (already linked)"
-        continue
+        echo "  skip  ${src#$DOTFILES_DIR/} (already linked)"
+        return
     fi
 
-    if [ -e "$dest" ] || [ -L "$dest" ]; then
-        echo "  back  $target → ${target}.bak"
+    if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+        echo "  back  ${src#$DOTFILES_DIR/} → ${dest}.bak"
         mv "$dest" "${dest}.bak"
     fi
 
+    mkdir -p "$(dirname "$dest")"
     ln -sfn "$src" "$dest"
-    echo "  link  $target → $src"
+    echo "  link  ${src#$DOTFILES_DIR/}"
+}
+
+# Symlink top-level dot-directories (e.g. .claude/)
+find "$DOTFILES_DIR" -mindepth 1 -maxdepth 1 -type d -name ".*" -not -name ".git" | while read -r dir; do
+    link_to_home "$dir"
+done
+
+# Symlink top-level dotfiles (e.g. .gitconfig)
+find "$DOTFILES_DIR" -mindepth 1 -maxdepth 1 -type f -name ".*" | while read -r file; do
+    link_to_home "$file"
 done
 
 echo ""
-echo "Done. ~/.claude config is now managed by $DOTFILES_DIR"
+echo "Done. Dotfiles are now managed by $DOTFILES_DIR"

@@ -1,36 +1,147 @@
-# This is a basic gitconfig template that includes some bare minimums for
-# interacting with git in a workspace.  The content between <Angle Brackets>
-# in this file must be replaced with values appropriate to you.  This can 
-# Be done manually or with the following series of commands run from the current
-# folder:
-#
-#  $ HOME=$(pwd) git config --global user.name "Bits the Dog"
-#  $ HOME=$(pwd) git config --global user.email "bits@datadoghq.com"
-#  $ HOME=$(pwd) git config --global user.signingkey "$(git config --global user.signingkey)"
-
 [user]
-        # The name you want to appear as the author of your commits
-        name = <YOUR NAME>
-	# The e-mail address that is associated to the author of your commits
-        email = <YOUR EMAIL>
-# This next section is optional and can be omitted if you do not use ssh git
-# commit signing.  However, doing so is highly encouraged, and if you have not
-# started using this workflow, see the onboarding docs for that:
-#    https://datadoghq.atlassian.net/wiki/spaces/SECENG/pages/2610300092/Project+Iota+Git+Commit+Signing+Onboarding
-#         # This is an ssh key that can be used to sign your commits, it should
-#         # be made available to your workspace via ssh agent forwarding and can be
-#         # seen on your laptop by issuing `git config --global user.signingkey`
-#         signingkey = <YOUR COMMIT SIGNING PUBLIC KEY>
-# [commit]
-# 	gpgsign = true
-# [gpg]
-# 	format = ssh
+	email = loic.mura@datadoghq.com
+	name = Loïc Mura
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBXXoNXrq7e2IW3eyx9qxGJDRvxBWTdDyT6Lsts8A3B
 
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 
-# This is a url rewrite that helps [go and maybe rust] tooling that downloads libraries from our private repos
-[url "git@github.com:DataDog/"]
-        insteadOf = https://github.com/DataDog/
-
-# This ensures that the Datadog global githooks work.  Please don't override this in your own dotfiles unless you have a strong reason to.
+# From https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+	defaultBranch = main
+[diff]
+	algorithm = histogram
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	# autoSetupRemote = true
+	followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+# why the hell not?
+# [help]
+#        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
 [core]
-        hooksPath = /home/bits/.global_hooks
+        excludesfile = ~/.gitignore
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
+[index]
+threads = true
+
+# a matter of taste (uncomment if you dare)
+[core]
+	# fsmonitor = true
+	# untrackedCache = true
+[merge]
+        # (just 'diff3' if git version < 2.3)
+        # conflictstyle = zdiff3 
+[pull]
+        # rebase = true
+# End
+
+[core]
+	hooksPath = /usr/local/dd/global_hooks
+	pager = delta
+	editor = nvim
+
+[help]
+	autocorrect = prompt 
+
+[pull]
+        rebase = true
+
+[rebase]
+	autoStash = true
+	autosquash = true
+
+[push]
+        autoSetupRemote = true
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+	singlekey = true
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	line-numbers = true
+	syntax-theme = Dracula
+	side-by-side = true
+
+[merge]
+	tool = vscode
+	# conflictstyle = zdiff3
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[diff]
+	colorMoved = plain 
+	# external = difft
+[commit]
+	gpgSign = true
+[gpg]
+	format = ssh
+[rerere]
+	enabled = true
+[http]
+	postBuffer = 524288000
+[init]
+	defaultBranch = main
+[gpg "ssh"]
+	program = dd-gitsign
+	allowedSignersFile = /Users/loic.mura/.config/gitsign/allowed-signers
+[dd-gitsign]
+	username = loic-mura
+[tag]
+	gpgSign = true
+
+[alias]
+	default-branch = !git rev-parse --abbrev-ref origin/HEAD | cut -b 8-
+	current-branch = !git branch --show-current
+	# List commits made since forking the main branch
+	changes = !git log --oneline origin/$(git default-branch)..
+	update-branch = !git pull --rebase origin $(git default-branch)
+	update-branch-green = !git pull --rebase origin green
+	update-branch-interactive = !git fetch origin $(git default-branch) && git rebase -i origin/$(git default-branch)
+	root = !git rev-parse --show-toplevel
+	add-proto = !git add -p ":/:*.proto" && git add ":/:*/proto/*"
+	review = !"git fetch -f origin $1:$1 && git switch -d $1 #"
+	rebase-branch = !"git fetch origin $(git default-branch) && git rebase origin/$(git default-branch) $1 #"
+	restore-all = !git restore --staged $(git root)
+    # -- stacked branches aliases, from https://andrewlock.net/pushing-a-whole-stack-of-branches-with-a-single-git-command/
+    #
+    # if "fatal: ref refs/remotes/origin/HEAD is not a symbolic ref", run "git remote set-head origin --auto"
+    # to set the default branch for origin
+    # list stack of branches -- list all branches between merge-base and target branch
+    stack = "!f() { \
+        BRANCH=${1-HEAD}; \
+        MERGE_BASE=$(git merge-base $BRANCH origin/$(git default-branch)); \
+        git log --decorate-refs=refs/heads --simplify-by-decoration --pretty=format:\"%(decorate:prefix=,suffix=,tag=,separator=%n)\" $MERGE_BASE..$BRANCH; \
+    };f "
+    # push all branches of a stack in one command
+	push-stack = "!f() { \
+        BRANCH=${1-HEAD}; \
+        git push --atomic --force-with-lease origin $(git stack $BRANCH | tr '\n' ' '); \
+    };f "
+[sendpack]
+	sideband = true
+[maintenance]
+	repo = /Users/loic.mura/go/src/github.com/DataDog/dd-source
