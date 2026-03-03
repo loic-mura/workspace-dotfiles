@@ -7,6 +7,8 @@
     "rapid@datadog-claude-plugins": true,
     "orgstore@datadog-claude-plugins": true,
     "writing@datadog-claude-plugins": true,
-    "dd-octo-sts@datadog-claude-plugins": true
-  }
+    "dd-octo-sts@datadog-claude-plugins": true,
+    "atlas@datadog-claude-plugins": true
+  },
+  "effortLevel": "medium"
 }

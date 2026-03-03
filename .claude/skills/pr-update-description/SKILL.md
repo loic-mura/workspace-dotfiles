@@ -1,6 +1,6 @@
 ---
 name: pr:update-description
-description: Update PR description using your style while respecting repo templates
+description: Update PR description using your style while respecting repo templates. Always invoke this skill when opening a pull request to generate the description or when asked to update a pull request.
 argument-hint: [optional context or instructions]
 allowed-tools: Bash(gh *), Read, Glob
 ---

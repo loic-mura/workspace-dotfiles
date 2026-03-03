@@ -16,10 +16,10 @@
       {
         "scope": "project",
         "projectPath": "/Users/loic.mura/go/src/github.com/DataDog/dd-source",
-        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd/1.0.1",
-        "version": "1.0.1",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd/910c9b7fa1b6",
+        "version": "910c9b7fa1b6",
         "installedAt": "2025-12-10T16:43:24.996Z",
-        "lastUpdated": "2025-12-10T16:43:24.996Z",
+        "lastUpdated": "2026-02-27T15:15:16.215Z",
         "gitCommitSha": "9892906e2215a648d509c67ac361242b3fc14d69"
       }
     ],
@@ -95,11 +95,21 @@
     "dd-octo-sts@datadog-claude-plugins": [
       {
         "scope": "user",
-        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd-octo-sts/fbc861fe93a5",
-        "version": "fbc861fe93a5",
-        "installedAt": "2026-02-19T08:55:02.912Z",
-        "lastUpdated": "2026-02-19T08:55:02.912Z",
-        "gitCommitSha": "fbc861fe93a560ada2bb9ed42f6b4af83ad980a1"
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/dd-octo-sts/910c9b7fa1b6",
+        "version": "910c9b7fa1b6",
+        "installedAt": "2026-02-27T15:14:44.259Z",
+        "lastUpdated": "2026-02-27T15:14:44.259Z",
+        "gitCommitSha": "910c9b7fa1b6cf7aa935b31424ab4862d57e8d31"
+      }
+    ],
+    "atlas@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/atlas/6d96b70d7a6e",
+        "version": "6d96b70d7a6e",
+        "installedAt": "2026-02-24T17:25:01.126Z",
+        "lastUpdated": "2026-02-24T17:25:01.126Z",
+        "gitCommitSha": "6d96b70d7a6e217f8fcfb968c6296f5944e8b988"
       }
     ]
   }
