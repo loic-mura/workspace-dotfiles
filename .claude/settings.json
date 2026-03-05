@@ -10,5 +10,30 @@
     "dd-octo-sts@datadog-claude-plugins": true,
     "atlas@datadog-claude-plugins": true
   },
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(go test *)",
+      "Bash(go build *)",
+      "Bash(go vet *)",
+      "Bash(go run *)",
+      "Bash(ls *)",
+      "Bash(colima *)",
+      "Bash(npm run *)",
+      "Bash(npx *)",
+      "Bash(yarn *)"
+    ],
+    "deny": [
+      "Bash(bazel clean *)",
+      "Bash(bzl clean *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)"
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
 }
