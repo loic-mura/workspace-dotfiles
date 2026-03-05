@@ -3,6 +3,34 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+if [ "$(uname -s)" = "Darwin" ]; then
+  # macOS
+  brew install bat
+  brew install delta-git
+  brew install neovim
+elif [ "$(uname -s)" = "Linux" ]; then
+  # Linux
+  sudo apt install bat
+  # Need alias bat=batcat
+  #
+  # Install delta-git
+  curl -sL $(curl -s https://api.github.com/repos/dandavison/delta/releases/latest | grep -oP '"browser_download_url":\s*"\K[^"]*amd64\.deb') -o /tmp/delta.deb
+  sudo dpkg -i /tmp/delta.deb
+  rm /tmp/delta.deb
+  sudo apt-get install neovim/c;
+fi
+
+# Install tools
+sudo apt-get update -qq
+for pkg in git-delta bat; do
+    if dpkg -s "$pkg" &>/dev/null; then
+        echo "  skip  $pkg (already installed)"
+    else
+        echo "  install  $pkg"
+        sudo apt-get install -y -qq "$pkg"
+    fi
+done
+
 link_to_home() {
     local src="$1"
     local dest="$HOME/${src#$DOTFILES_DIR/}"
