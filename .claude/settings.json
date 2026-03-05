@@ -33,7 +33,9 @@
       "Bash(colima *)",
       "Bash(npm run *)",
       "Bash(npx *)",
-      "Bash(yarn *)"
+      "Bash(yarn *)",
+      "Bash(bzl test *)",
+      "Bash(bzl build *)"
     ],
     "deny": [
       "Bash(bazel clean *)",
