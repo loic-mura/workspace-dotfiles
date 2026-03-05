@@ -1,5 +1,13 @@
 {
   "model": "opus",
+  "extraKnownMarketplaces": {
+    "datadog": {
+      "source": {
+	"source": "github",
+	"repo": "DataDog/claude-marketplace"
+      }
+    }
+  },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "advanced-query@datadog-claude-plugins": true,
