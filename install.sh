@@ -7,6 +7,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
   # macOS
   brew install bat
   brew install delta-git
+  brew install git-absorb
   brew install neovim
 elif [ "$(uname -s)" = "Linux" ]; then
   # Linux
@@ -18,6 +19,11 @@ elif [ "$(uname -s)" = "Linux" ]; then
   sudo dpkg -i /tmp/delta.deb
   rm /tmp/delta.deb
   sudo apt-get install neovim/c;
+  # Install git-absorb from GitHub release (no .deb available)
+  curl -sL $(curl -s https://api.github.com/repos/tummychow/git-absorb/releases/latest | grep -oP '"browser_download_url":\s*"\K[^"]*x86_64-unknown-linux-musl\.tar\.gz') -o /tmp/git-absorb.tar.gz
+  tar -xzf /tmp/git-absorb.tar.gz -C /tmp
+  sudo mv /tmp/git-absorb-*/git-absorb /usr/local/bin/
+  rm -rf /tmp/git-absorb.tar.gz /tmp/git-absorb-*
 fi
 
 # Install tools
