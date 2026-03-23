@@ -93,7 +93,7 @@ threads = true
 	cmd = code --wait $MERGED
 
 [diff]
-	colorMoved = plain 
+	colorMoved = plain
 	# external = difft
 [commit]
 	gpgSign = true

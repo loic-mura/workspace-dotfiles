@@ -11,9 +11,10 @@ description: create a feature
 
 ## Setup
 
-1. Derive the jira ticket number from the prompt or ask the user
-2. Derive a kebab-case slug from the task description (e.g., "rename an SD" → `rename-sd`)
-3. Create and checkout git branch:`loic.mura/{ticket}-{slug}`
+1. Derive the jira ticket number from the prompt or the branch name or ask the user. When deducing from the branch name, ask the user for confirmation.
+2. If the current branch name doesn't correspond to the current task:
+   1. Derive a kebab-case slug from the task description (e.g., "rename an SD" → `rename-sd`)
+   2. Create a new branch name `loic.mura/{ticket}-{slug}` from the latest version of the default branch (except if working on a stack PR)
 
 **Note:** Directory creation and PROMPT.md are delayed until Phase 1, after determining the appropriate plan location based on code exploration.
 
@@ -33,7 +34,8 @@ Your task is NOT to implement yet, but to fully understand and prepare.
 After initial exploration and before writing questions:
 
 1. **Determine the plan directory path**:
-   - Plan path will be: `~/.plans/{branch-name}/`
+   - Find the Git repository root.
+   - Plan path will be: `{repository_root}}/.plans/{branch-name}/`
    - Look for markers like service boundaries, module roots, or logical component groupings
 2. **Create the plan directory** and **save PROMPT.md** with the exact $ARGUMENTS text
 
@@ -83,7 +85,7 @@ Once plan location is established:
 
 **Questions File Template:**
 
-When creating QUESTIONS-*.md files, use this format:
+When creating QUESTIONS-\*.md files, use this format:
 
 ```markdown
 <!-- INSTRUCTIONS FOR ANSWERING QUESTIONS -->
@@ -103,7 +105,6 @@ When creating QUESTIONS-*.md files, use this format:
 ## Anything else you'd like to mention?
 
 **Additional context or clarifications:**
-
 
 <!-- Save this file when you're done -->
 ```
@@ -144,7 +145,8 @@ Based on the full exchange, produce a markdown plan document (`{plan-dir}/PLAN.m
 - Tests BEFORE implementation (TDD)
 
 ** Plan Maintenance **
-- *Every step* must end with a subitem to update plan documents
+
+- _Every step_ must end with a subitem to update plan documents
 - Plan documents include:
   - `PLAN.md` the top-level plan with overall progress
   - `PLAN-PHASE-{N}.md` - detailed phase plans (when overall plan is big enough)
@@ -179,7 +181,6 @@ Based on the full exchange, produce a markdown plan document (`{plan-dir}/PLAN.m
   - [ ] 🟥 Implement: Design login page component
   - [ ] 🟥 Test: Run `npm test LoginPage.test.jsx`
   - [ ] 🟥 Update PLAN.md (and PLAN-PHASE-2.md if exists)
-
 ```
 
 **⏸ CHECKPOINT**: When PLAN.md is ready, say "Plan created. Say 'continue' for Phase 3"
@@ -191,6 +192,7 @@ Based on the full exchange, produce a markdown plan document (`{plan-dir}/PLAN.m
 Review the plan in PLAN.md as a staff engineer using this comprehensive checklist.
 
 **IMPORTANT:** Ensure the plan follows TDD (Test-Driven Development):
+
 - Tests should be written BEFORE implementation code
 - Every task should have corresponding test tasks
 - Test commands should be listed
@@ -198,6 +200,7 @@ Review the plan in PLAN.md as a staff engineer using this comprehensive checklis
 ### Review Checklist
 
 #### 1. Task Sequencing & Visibility (Including TDD)
+
 - Tests written FIRST, then implementation (strict TDD)
 - Early tasks show visible progress without extra work
 - Tasks that don't belong are identified for removal
@@ -205,31 +208,37 @@ Review the plan in PLAN.md as a staff engineer using this comprehensive checklis
 - Each implementation task has corresponding test task(s)
 
 #### 2. Dependencies & Task Ordering
+
 - Prerequisites completed before dependent tasks
 - Independent tasks identified for parallel execution
 - Read/understand steps precede modification steps
 
 #### 3. Risk Management & Validation
+
 - High-risk/uncertain tasks scheduled early (fail-fast principle)
 - Verification/validation step exists for each major change
 - Rollback strategy defined if changes break functionality
 
 #### 4. Scope Control
+
 - Task granularity appropriate (neither too fine nor too coarse)
 - Scope creep and tangential work avoided
 - Clear stopping point defined (not open-ended)
 
 #### 5. Technical Readiness
+
 - Required files, dependencies, and permissions identified
 - Breaking changes identified and mitigation planned
 - Backwards compatibility addressed if needed
 
 #### 6. Efficiency & Reuse
+
 - Existing solutions checked before building new ones
 - Existing patterns/code identified for reuse
 - Unnecessary exploration avoided when path is known
 
 #### 7. Communication & Checkpoints
+
 - Natural checkpoints exist to show user progress
 - User input/decisions required identified upfront
 - Output/deliverable clearly defined
@@ -238,7 +247,7 @@ Review the plan in PLAN.md as a staff engineer using this comprehensive checklis
 
 - PLAN sections should link to QUESTIONS or other .md files where relevant
 - This phase may generate questions - write them to `{plan-dir}/QUESTIONS-PLAN-1.md` (and iterate as needed)
-- After review, if you identify any ambiguities or missing information, ask questions in QUESTIONS-PLAN-*.md files
+- After review, if you identify any ambiguities or missing information, ask questions in QUESTIONS-PLAN-\*.md files
 
 **⏸ CHECKPOINT**: When plan is finalized, say "Plan finalized. Say 'continue' for Phase 4"
 

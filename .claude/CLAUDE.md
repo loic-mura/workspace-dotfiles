@@ -1,4 +1,4 @@
-When interacting with Github (github.com), ALWAYS use \`gh\` on the command line.
+When interacting with Github (github.com), ALWAYS use `gh` on the command line.
 
 # Coding style
 
@@ -7,3 +7,6 @@ When interacting with Github (github.com), ALWAYS use \`gh\` on the command line
 - Do not add comments for simple logic. Extract it to variables/functions, use naming to communicate intention.
 - Always put the exported functions/class at the top of the file, and helpers, utils below. When reviewing the change, it's easier to get the rough idea of what's being done, and then we get the helpers details, instead of wondering what we are trying to do.
 - When addressing pull requests feedbacks or iterating on a feature/bug fix, prefer amending existing commits than creating new ones. You can use `git absorb -F --and-rebase` if available or fallback to `git commit --fixup`
+- Always create pull request as draft first
+- When creating pull requests, always use `/pr-update-description` to create its description.
+- Always trust cached test results from `bazel` / `bzl`
