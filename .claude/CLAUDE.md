@@ -1,5 +1,7 @@
 When interacting with Github (github.com), ALWAYS use `gh` on the command line.
 
+- Always use `git switch` to switch git branches.
+
 # Coding style
 
 - Git branches should be prefixed by `loic.mura/` and if a JIRA ticket is linked to the current task, then it becomes `loic.mura/codex-<ticket number>-<slug>` with slug being a short description of what's being done.
@@ -10,3 +12,4 @@ When interacting with Github (github.com), ALWAYS use `gh` on the command line.
 - Always create pull request as draft first
 - When creating pull requests, always use `/pr-update-description` to create its description.
 - Always trust cached test results from `bazel` / `bzl`
+- when creating pull requests, do not mention the JIRA ticket because it's already present in the branch name.
