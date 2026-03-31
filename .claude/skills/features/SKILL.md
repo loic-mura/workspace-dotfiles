@@ -275,7 +275,7 @@ Now implement precisely as planned, in full.
 ## Phase 5: Submit code
 
 - Push the code to the remote
-- Open a pull request as a draft for the user to review or update the description so that it's accurate with the current modifications, use this format as title: `[{ticket-number}] {ticket-title}`
+- Open a pull request as a draft for the user to review or update the description so that it's accurate with the current modifications, use this format as title: `<service>: <title>`
 - Update the PROMPT.md file to add all the prompts from this conversation but exclude the `continue`
 
 **⏸ CHECKPOINT**: When code is submitted, say "Ask for user feedback on the current Pull Request"
