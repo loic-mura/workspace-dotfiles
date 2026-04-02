@@ -117,6 +117,13 @@ When creating QUESTIONS-\*.md files, use this format:
 
 Based on the full exchange, produce a markdown plan document (`{plan-dir}/PLAN.md`).
 
+**Before writing the plan:**
+
+- **Read ALL `AGENTS.md` files** in every directory likely to be touched by this feature
+- **Read ALL `CLAUDE.md` files** (project root and nested) for coding style, naming conventions, commit rules, and project-specific requirements
+- Note any conventions, mandatory doc updates, or constraints that the plan must account for
+- If any convention conflicts with the planned approach, flag it now rather than discovering it post-implementation
+
 **Requirements for the plan:**
 
 - Include clear, minimal, concise steps
@@ -237,7 +244,14 @@ Review the plan in PLAN.md as a staff engineer using this comprehensive checklis
 - Existing patterns/code identified for reuse
 - Unnecessary exploration avoided when path is known
 
-#### 7. Communication & Checkpoints
+#### 7. Convention & Compliance Pre-Check
+
+- Plan accounts for all rules in `AGENTS.md` and `CLAUDE.md` files (coding style, naming, doc updates, commit format, etc.)
+- Tasks that produce doc-mandated side effects (e.g., README updates, CHANGELOG entries) are explicitly included in the plan
+- No planned changes contradict project conventions — if a deviation is intentional, it is flagged with justification
+- Files outside the feature scope are not modified unless required by a convention (e.g., an index file that must be updated)
+
+#### 8. Communication & Checkpoints
 
 - Natural checkpoints exist to show user progress
 - User input/decisions required identified upfront
@@ -268,11 +282,69 @@ Now implement precisely as planned, in full.
 - Update PLAN.md if implementation reality differs from the original plan
 - Update PROMPT.md if new requirements are given by the user
 
-**⏸ CHECKPOINT**: Pause before commits for user approval
+**⏸ CHECKPOINT**: Always pause before commits and ask for user approval
 
 ---
 
-## Phase 5: Submit code
+## Phase 5: Compliance & Documentation Review
+
+**BEFORE YOU BEGIN - Phase Gate Check:** Verify that Phase 4 (Implementation) is complete and all tests pass. If implementation is not done, STOP and go back to Phase 4.
+
+Launch a **subagent** to perform this review. The subagent must independently verify, do NOT self-review your own work.
+
+**Subagent instructions:**
+
+You are a compliance reviewer. Your job is to verify that all chang4es in this branch respect project conventions and that documentation is up to date. Be thorough and critical - do not rubber stamp.
+
+### 1. Convention Compliance
+
+- **Read ALL `AGENTS.md` files** in every directory touched by the changes. Verify every instructions was followed, including ones, that seem trivial (doc updates, formatting rules, ...).
+- **Read ALL `CLAUDE.md` files** (project root and any nested ones). Verify coding style, naming conventions, commit message format, and any project-specific rules were respected.
+- **Check for scope creep**: Compare the diff against the original task description in `PROMPT.md`. Flag any changes that go beyond what was requested.
+
+### 2. Documentation Accuracy
+
+- For every new or modified public function, type, endpoint or config option: verify that relevant documentation (READMEs, inline docs, API docs, comments) accurately reflects the current code.
+- For every removed or renamed symbol: verify that stale references were cleaned up across docs, comments and configuration files.
+- If `AGENTS.md` or any project docs mandate doc updates for certain change types, verify those updates were made.
+
+### 3. Consistency Check
+
+- Verify new code follows existing patterns in the codebase (naming, file structure, error handling, test patterns, ...)
+- Verify no files were modified outside the scope of the feature.
+- Verify test coverage: every new behavior has corresponding tests, and tests actually run and pass.
+
+**Output Format:**
+
+Write findings to `{plan-dir}/REVIEW.md` using this structure:
+
+```markdown
+# Compliance & Documentation Review
+
+## ✅ Passing
+
+- [list what's good]
+
+## ⚠️ Suggestions
+
+- [non-blocking improvements]
+
+## 🚫 Must Fix
+
+- [blocking issues that violate AGENTS.md, CLAUDE.md, or leave docs inaccurate]
+```
+
+After subagent completes:
+
+1. Read `REVIEW.md`
+2. If there are **🚫 Must Fix** items: address them all, then re-run this phase
+3. If only ✅ and ⚠️: present findings to user
+
+**⏸ CHECKPOINT**: When review passes with no Must Fix items, say "Compliance review passed. Say 'continue' to finalize."
+
+---
+
+## Phase 6: Submit code
 
 - Push the code to the remote
 - Open a pull request as a draft for the user to review or update the description so that it's accurate with the current modifications, use this format as title: `<service>: <title>`
