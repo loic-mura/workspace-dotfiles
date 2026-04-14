@@ -111,6 +111,16 @@
         "lastUpdated": "2026-02-24T17:25:01.126Z",
         "gitCommitSha": "6d96b70d7a6e217f8fcfb968c6296f5944e8b988"
       }
+    ],
+    "rewrite@datadog-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/loic.mura/.claude/plugins/cache/datadog-claude-plugins/rewrite/5aac334e604e",
+        "version": "5aac334e604e",
+        "installedAt": "2026-04-09T09:44:24.727Z",
+        "lastUpdated": "2026-04-09T09:44:24.727Z",
+        "gitCommitSha": "5aac334e604e4e33b7e28976d48602a89d2f83be"
+      }
     ]
   }
 }

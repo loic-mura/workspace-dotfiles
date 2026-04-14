@@ -38,9 +38,9 @@
 [core]
         excludesfile = ~/.gitignore
 [rebase]
-        autoSquash = true
-        autoStash = true
-        updateRefs = true
+    # autoSquash = true
+    autoStash = true
+    updateRefs = true
 
 [index]
 threads = true
@@ -66,10 +66,6 @@ threads = true
 
 [pull]
         rebase = true
-
-[rebase]
-	autoStash = true
-	autosquash = true
 
 [push]
         autoSetupRemote = true

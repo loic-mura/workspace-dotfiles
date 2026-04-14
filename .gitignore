@@ -9,3 +9,6 @@
 !.claude/plugins/
 .claude/plugins/*
 !.claude/plugins/installed_plugins.json
+
+
+.plans

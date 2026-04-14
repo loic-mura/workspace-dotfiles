@@ -36,6 +36,7 @@ After initial exploration and before writing questions:
 1. **Determine the plan directory path**:
    - Find the Git repository root.
    - Plan path will be: `{repository_root}}/.plans/{branch-name}/`
+     If the `{branch-name}` contains any `/`, replace them by `-` to not create any sub-folders.
    - Look for markers like service boundaries, module roots, or logical component groupings
 2. **Create the plan directory** and **save PROMPT.md** with the exact $ARGUMENTS text
 
@@ -296,6 +297,8 @@ Launch a **subagent** to perform this review. The subagent must independently ve
 
 You are a compliance reviewer. Your job is to verify that all chang4es in this branch respect project conventions and that documentation is up to date. Be thorough and critical - do not rubber stamp.
 
+**Before reviewing, read all files within {plan-dir}.** User answers in those files represent intentional, validated decisions. Do not flag them as violations, they take precedence over general guidelines in `AGENTS.md`/`CLAUDE.md`.
+
 ### 1. Convention Compliance
 
 - **Read ALL `AGENTS.md` files** in every directory touched by the changes. Verify every instructions was followed, including ones, that seem trivial (doc updates, formatting rules, ...).
@@ -346,10 +349,14 @@ After subagent completes:
 
 ## Phase 6: Submit code
 
+- Update the PROMPT.md file to add all the prompts from this conversation but exclude the `continue`
 - Push the code to the remote
 - Open a pull request as a draft for the user to review or update the description so that it's accurate with the current modifications, use this format as title: `<service>: <title>`
-- Update the PROMPT.md file to add all the prompts from this conversation but exclude the `continue`
 
 **⏸ CHECKPOINT**: When code is submitted, say "Ask for user feedback on the current Pull Request"
 
 If the user wants some modifications or additional implementation, go back to Phase 4.
+
+If the user is happy with the current changes and that the current work is associated with a JIRA ticket, ask the user if the ticket should be marked as "In Review".
+
+Once done, move the plan to `{repository_root}}/.plans/archived/{branch-name}/`.
